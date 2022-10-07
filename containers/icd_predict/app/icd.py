@@ -47,12 +47,12 @@ class ICD:
         self.label_dict = {}
 
         for file in glob.glob(PATH + "models/models/disease/*.json"):  
-            baseName = os.path.basename(file)[6:-5]   
+            baseName = os.path.basename(file)[6:-9]   
             json_file = open(file, 'r')
             loaded_model_json = json_file.read()
             json_file.close()
             self.model_dict[baseName] = model_from_json(loaded_model_json)
-            self.model_dict[baseName].load_weights(file[:-5]+".h5")
+            self.model_dict[baseName].load_weights(file[:-9]+".h5")
             labels = pd.read_csv(PATH + 'models/models/disease/chapter_labels/'+baseName).columns[1:]
             self.label_dict[baseName] = labels
 

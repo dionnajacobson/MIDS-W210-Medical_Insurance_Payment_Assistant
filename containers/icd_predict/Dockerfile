@@ -43,8 +43,8 @@ RUN mkdir -p /final
 WORKDIR /final/app/models
 
 # Download the ICD Code Model
-RUN wget https://brent-w210-models.s3-us-west-2.amazonaws.com/models.zip
-RUN unzip models.zip
+# RUN wget https://brent-w210-models.s3-us-west-2.amazonaws.com/models.zip
+# RUN unzip models.zip
 
 WORKDIR /final
 ADD app /final/app
