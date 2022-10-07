@@ -52,8 +52,8 @@ class ICD:
             loaded_model_json = json_file.read()
             json_file.close()
             self.model_dict[baseName] = model_from_json(loaded_model_json)
-            self.model_dict[baseName].load_weights(file[:-9]+".h5")
-            labels = pd.read_csv(PATH + 'models/models/disease/chapter_labels/'+baseName).columns[1:]
+            self.model_dict[baseName].load_weights(file[:-5]+".h5")
+            labels = pd.read_csv(PATH + 'models/models/disease/chapter_labels/'+baseName+'.csv').columns[1:]
             self.label_dict[baseName] = labels
 
         self.text = ''
@@ -109,8 +109,8 @@ class ICD:
 
         for model in selected_models:
             if model != "680_709":
-                model_pred = self.model_dict[model+".csv"].predict(embeddings_padded)[0]
-                self.disease_dict[model] = {key: value for (key,value) in zip(self.label_dict[model+".csv"], model_pred)}
+                model_pred = self.model_dict[model].predict(embeddings_padded)[0]
+                self.disease_dict[model] = {key: value for (key,value) in zip(self.label_dict[model], model_pred)}
 
         self.text = text
         print(f'All Other Models Pred: {time.time()-start}')
